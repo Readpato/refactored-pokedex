@@ -1,5 +1,10 @@
-const POKEMON_LIST_URL = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0";
+const POKEMON_LIST_URL = "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0";
 const POKEMON_SEARCH_URL = "https://pokeapi.co/api/v2/pokemon/";
+
+const $loadingListPlaceholder = document.querySelector(
+  ".loading-list-placeholder"
+);
+
 const $form = document.querySelector("form");
 const $errorPokemonCard = document.querySelector(".error-pokemon-card");
 const $pokemonSearchButton = document.querySelector(".pokemon-search-button");
@@ -13,21 +18,38 @@ const $homepageButton = document.querySelector(".homepage-button");
 let nextPokemonList;
 let previousPokemonList;
 
-function loadPokemonList(pokeApiURL) {
+function initialize(pokeApiURL) {
   return fetch(pokeApiURL)
-    .then((api_response) => {
-      if (!api_response.ok)
-        return "Something went wrong, please try again later.";
-      return api_response.json();
+    .then((response) => {
+      if (!response.ok) return "Something went wrong, please try again later.";
+      showElement($loadingListPlaceholder);
+      return response.json();
     })
-    .then((api_responseJSON) => {
-      nextPokemonList = api_responseJSON.next;
-      previousPokemonList = api_responseJSON.previous;
-      return api_responseJSON.results.forEach((object) => {
-        loadSinglePokemon(object.url);
-      });
+    .then((responseJSON) => {
+      console.log(responseJSON);
+      const { results: pokemon } = responseJSON;
+      hideElement($loadingListPlaceholder);
+      showPokemonList(pokemon);
+      // nextPokemonList = api_responseJSON.next;
+      // previousPokemonList = api_responseJSON.previous;
+      // return api_responseJSON.results.forEach((object) => {
+      //   // loadSinglePokemon(object.url);
+      // });
     })
     .catch((error) => console.error(error));
+}
+
+function showPokemonList(pokemon) {
+  const $pokemonList = document.querySelector(".pokemon-list");
+  pokemon.forEach((pokemon) => {
+    const $li = document.createElement("li");
+    $li.classList.add("list-group-item");
+    const $anchor = document.createElement("a");
+    $anchor.textContent = capitalizeFirstLetter(pokemon.name);
+    $anchor.setAttribute("href", pokemon.url);
+    $li.appendChild($anchor);
+    return $pokemonList.appendChild($li);
+  });
 }
 
 function loadSinglePokemon(pokemonURL) {
@@ -101,33 +123,33 @@ function assessPokemonTypeQuantity(typeQuantity) {
   }
 }
 
-$lowerNextButton.addEventListener("click", () => {
-  if (nextPokemonList === null) return function () {};
-  // Maybe we can add an alert that says that they are at the begining or the end
-  deletePreviousPokemonCards();
-  loadPokemonList(nextPokemonList);
-});
+// $lowerNextButton.addEventListener("click", () => {
+//   if (nextPokemonList === null) return function () {};
+//   // Maybe we can add an alert that says that they are at the begining or the end
+//   deletePreviousPokemonCards();
+//   loadPokemonList(nextPokemonList);
+// });
 
-$upperNextButton.addEventListener("click", () => {
-  if (nextPokemonList === null) return function () {};
-  // Maybe we can add an alert that says that they are at the begining or the end
-  deletePreviousPokemonCards();
-  loadPokemonList(nextPokemonList);
-});
+// $upperNextButton.addEventListener("click", () => {
+//   if (nextPokemonList === null) return function () {};
+//   // Maybe we can add an alert that says that they are at the begining or the end
+//   deletePreviousPokemonCards();
+//   loadPokemonList(nextPokemonList);
+// });
 
-$lowerPreviousButton.addEventListener("click", () => {
-  if (previousPokemonList === null) return function () {};
-  // Maybe we can add an alert that says that they are at the begining or the end
-  deletePreviousPokemonCards();
-  loadPokemonList(previousPokemonList);
-});
+// $lowerPreviousButton.addEventListener("click", () => {
+//   if (previousPokemonList === null) return function () {};
+//   // Maybe we can add an alert that says that they are at the begining or the end
+//   deletePreviousPokemonCards();
+//   loadPokemonList(previousPokemonList);
+// });
 
-$upperPreviousButton.addEventListener("click", () => {
-  if (previousPokemonList === null) return function () {};
-  // Maybe we can add an alert that says that they are at the begining or the end
-  deletePreviousPokemonCards();
-  loadPokemonList(previousPokemonList);
-});
+// $upperPreviousButton.addEventListener("click", () => {
+//   if (previousPokemonList === null) return function () {};
+//   // Maybe we can add an alert that says that they are at the begining or the end
+//   deletePreviousPokemonCards();
+//   loadPokemonList(previousPokemonList);
+// });
 
 $pokemonSearchButton.addEventListener("click", (event) => {
   validateForm();
@@ -242,4 +264,4 @@ function showElement(element) {
   element.classList.remove("hidden");
 }
 
-// loadPokemonList(POKEMON_LIST_URL);
+initialize(POKEMON_LIST_URL);
