@@ -1,5 +1,7 @@
 main {
   .pokemon-card {
+    margin-left: 0.5em;
+    height: fit-content;
     margin-bottom: 0.25rem;
     width: 14em;
     background-color: $card-color;

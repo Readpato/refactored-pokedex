@@ -242,4 +242,4 @@ function showElement(element) {
   element.classList.remove("hidden");
 }
 
-loadPokemonList(POKEMON_LIST_URL);
+// loadPokemonList(POKEMON_LIST_URL);

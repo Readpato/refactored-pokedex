@@ -50,61 +50,138 @@
       </div>
     </nav>
 
-    <main
-      class="d-flex flex-column align-items-center justify-content-evenly flex-wrap flex-grow"
-    >
-      <div class="upper-transition-buttons-container mt-3 mb-1">
-        <button
-          type="button"
-          class="btn btn-info btn-lg text-white upper-previous-button"
-        >
-          Prev
-        </button>
-        <button
-          type="button"
-          class="btn btn-info btn-lg text-white upper-next-button"
-        >
-          Next
-        </button>
-      </div>
-      <div
-        class="container mt-2 pokemon-list-container d-flex flex-wrap align-items-center justify-content-evenly flex-grow"
-      >
-        <div class="mt-2 error-pokemon-card hidden">
-          <img
-            class="card-img-top error-pokemon-card-image"
-            src="src/images/pokemon-silhouette.png"
-            alt="An image depicting the silhouette of a Pokemon."
-          />
-          <div class="card-body">
-            <h5 class="error-pokemon-name">Uh-oh! Error!</h5>
-            <ul class="error-pokemon-description">
-              <li>Number: 404</li>
-              <li class="error-description"></li>
+    <main>
+      <div class="container-fluid mt-2">
+        <div class="row">
+          <div class="col col-lg-2">
+            <ul class="list-group">
+              <li class="list-group-item">An item</li>
+              <li class="list-group-item">A second item</li>
+              <li class="list-group-item">A third item</li>
+              <li class="list-group-item">A fourth item</li>
+              <li class="list-group-item">And a fifth one</li>
+              <li class="list-group-item">An item</li>
+              <li class="list-group-item">A second item</li>
+              <li class="list-group-item">A third item</li>
+              <li class="list-group-item">A fourth item</li>
+              <li class="list-group-item">And a fifth one</li>
+              <li class="list-group-item">An item</li>
+              <li class="list-group-item">A second item</li>
+              <li class="list-group-item">A third item</li>
+              <li class="list-group-item">A fourth item</li>
+              <li class="list-group-item">And a fifth one</li>
+              <li class="list-group-item">An item</li>
+              <li class="list-group-item">A second item</li>
+              <li class="list-group-item">A third item</li>
+              <li class="list-group-item">A fourth item</li>
+              <li class="list-group-item">And a fifth one</li>
             </ul>
           </div>
+          <div class="col col-lg-10 d-flex flex-wrap flex-column">
+            <div class="row">
+              <div class="col col-lg-12">
+                <h2 class="text-center">Choose a Pokemon from the list</h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-lg-12">
+                <div class="pokemon-card">
+                  <img
+                    class="card-img-top pokemon-card-image"
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
+                    alt="An image depicting the front part of pokemon Ivysaur"
+                  />
+                  <div class="card-body">
+                    <h5 class="pokemon-name">Ivysaur</h5>
+                    <ul class="pokemon-description">
+                      <li>Number: 2</li>
+                      <li>Type: Grass - Poison</li>
+                      <li>Weight: 130</li>
+                      <li>Height: 10</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <nav
+            class="mt-1 d-flex justify-content-center mt-0"
+            aria-label="Page navigation"
+          >
+            <ul class="pagination pagination-sm">
+              <li class="page-item">
+                <a class="page-link" href="#">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </nav>
         </div>
-      </div>
-      <div class="lower-transition-buttons-container mt-2 mb-1">
+
         <button
           type="button"
-          class="btn btn-info btn-lg text-white lower-previous-button"
+          class="btn btn-info btn-lg text-white homepage-button hidden"
         >
-          Prev
-        </button>
-        <button
-          type="button"
-          class="btn btn-info btn-lg text-white lower-next-button"
-        >
-          Next
+          Return to Pokedex
         </button>
       </div>
-      <button
-        type="button"
-        class="btn btn-info btn-lg text-white homepage-button hidden"
-      >
-        Return to Pokedex
-      </button>
     </main>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
