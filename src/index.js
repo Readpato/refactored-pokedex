@@ -124,34 +124,6 @@ function assessPokemonTypeQuantity(typeQuantity) {
   }
 }
 
-// $lowerNextButton.addEventListener("click", () => {
-//   if (nextPokemonList === null) return function () {};
-//   // Maybe we can add an alert that says that they are at the begining or the end
-//   deletePreviousPokemonCards();
-//   loadPokemonList(nextPokemonList);
-// });
-
-// $upperNextButton.addEventListener("click", () => {
-//   if (nextPokemonList === null) return function () {};
-//   // Maybe we can add an alert that says that they are at the begining or the end
-//   deletePreviousPokemonCards();
-//   loadPokemonList(nextPokemonList);
-// });
-
-// $lowerPreviousButton.addEventListener("click", () => {
-//   if (previousPokemonList === null) return function () {};
-//   // Maybe we can add an alert that says that they are at the begining or the end
-//   deletePreviousPokemonCards();
-//   loadPokemonList(previousPokemonList);
-// });
-
-// $upperPreviousButton.addEventListener("click", () => {
-//   if (previousPokemonList === null) return function () {};
-//   // Maybe we can add an alert that says that they are at the begining or the end
-//   deletePreviousPokemonCards();
-//   loadPokemonList(previousPokemonList);
-// });
-
 $pokemonSearchButton.addEventListener("click", (event) => {
   validateForm();
   event.preventDefault();
