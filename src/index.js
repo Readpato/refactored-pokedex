@@ -45,10 +45,7 @@ function showPokemonList(pokemon) {
   pokemon.forEach((pokemon) => {
     const $li = document.createElement("li");
     $li.classList.add("list-group-item");
-    const $anchor = document.createElement("a");
-    $anchor.textContent = capitalizeFirstLetter(pokemon.name);
-    $anchor.setAttribute("href", "#");
-    $li.appendChild($anchor);
+    $li.textContent = `${capitalizeFirstLetter(pokemon.name)}`;
     $li.addEventListener("click", () => {
       loadSinglePokemon(`${POKEMON_SEARCH_URL}${pokemon.name}`);
     });
