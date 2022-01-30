@@ -47,6 +47,7 @@ function showPokemonList(pokemon) {
     $li.classList.add("list-group-item");
     $li.textContent = `${capitalizeFirstLetter(pokemon.name)}`;
     $li.addEventListener("click", () => {
+      deletePreviousPokemonCards();
       loadSinglePokemon(`${POKEMON_SEARCH_URL}${pokemon.name}`);
     });
     return $pokemonList.appendChild($li);
