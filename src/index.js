@@ -26,10 +26,11 @@ function initialize(pokeApiURL) {
       return response.json();
     })
     .then((responseJSON) => {
-      console.log(responseJSON);
       const { results: pokemon } = responseJSON;
       hideElement($loadingListPlaceholder);
+      console.log(pokemon);
       showPokemonList(pokemon);
+
       // nextPokemonList = api_responseJSON.next;
       // previousPokemonList = api_responseJSON.previous;
       // return api_responseJSON.results.forEach((object) => {
@@ -46,8 +47,11 @@ function showPokemonList(pokemon) {
     $li.classList.add("list-group-item");
     const $anchor = document.createElement("a");
     $anchor.textContent = capitalizeFirstLetter(pokemon.name);
-    $anchor.setAttribute("href", pokemon.url);
+    $anchor.setAttribute("href", "#");
     $li.appendChild($anchor);
+    $li.addEventListener("click", () => {
+      loadSinglePokemon(`${POKEMON_SEARCH_URL}${pokemon.name}`);
+    });
     return $pokemonList.appendChild($li);
   });
 }
