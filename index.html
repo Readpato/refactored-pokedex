@@ -54,24 +54,19 @@
       <div class="container-fluid mt-2">
         <div class="row">
           <div
-            class="col col-lg-4 offset-lg-3 col-sm-12 d-flex flex-wrap flex-column"
+            class="col col-lg-4col-sm-12 d-flex flex-wrap flex-column justify-content-center align-items-center"
           >
-            <div
-              class="d-flex justify-content-center align-items-center flex-wrap pokemon-card-container"
-            >
-              <div class="pokemon-card">
+            <div class="pokemon-card-container">
+              <div class="mt-2 initial-pokemon-card">
                 <img
-                  class="card-img-top pokemon-card-image"
-                  src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
-                  alt="An image depicting the front part of pokemon Ivysaur"
+                  class="card-img-top initial-pokemon-card-image"
+                  src="src/images/initial-pokemon-silhouette.png"
+                  alt="An image depicting the silhouette of a Pokemon."
                 />
                 <div class="card-body">
-                  <h5 class="pokemon-name">Ivysaur</h5>
-                  <ul class="pokemon-description">
-                    <li>Number: 2</li>
-                    <li>Type: Grass - Poison</li>
-                    <li>Weight: 130</li>
-                    <li>Height: 10</li>
+                  <h5 class="initial-pokemon-name">Select a Pokemon!</h5>
+                  <ul class="initial-pokemon-description">
+                    <li>Find more about pokemon by clicking on their name.</li>
                   </ul>
                 </div>
               </div>
@@ -161,12 +156,12 @@
       </div>
       <div class="row">
         <div
-          class="col col-lg-12 d-flex align-items-center justify-content-center"
+          class="col col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center align-items-center"
         >
           <div class="mt-2 error-pokemon-card hidden">
             <img
               class="card-img-top error-pokemon-card-image"
-              src="src/images/pokemon-silhouette.png"
+              src="src/images/error-pokemon-silhouette.png"
               alt="An image depicting the silhouette of a Pokemon."
             />
             <div class="card-body">
@@ -178,8 +173,30 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="row">
         <div
-          class="col col-lg-12 d-flex align-items-center justify-content-center"
+          class="col col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center align-items-center"
+        >
+          <div class="mt-2 error-pokemon-card hidden">
+            <img
+              class="card-img-top error-pokemon-card-image"
+              src="src/images/error-pokemon-silhouette.png"
+              alt="An image depicting the silhouette of a Pokemon."
+            />
+            <div class="card-body">
+              <h5 class="error-pokemon-name">Uh-oh! Error!</h5>
+              <ul class="error-pokemon-description">
+                <li>Number: 404</li>
+                <li class="error-description"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div
+          class="col col-lg-12 col-md-12 col-sm-12 d-flex align-items-center justify-content-center"
         >
           <button
             type="button"

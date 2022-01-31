@@ -17,6 +17,23 @@ main {
       margin-right: 2rem;
     }
   }
+
+  .initial-pokemon-card {
+    margin-left: 0.5em;
+    height: fit-content;
+    margin-bottom: 0.25rem;
+    width: 20em;
+    background-color: $card-color;
+    transition: transform 0.5s ease;
+    border-radius: 1rem;
+  }
+
+  .initial-pokemon-description {
+    list-style-image: url("../images/pokeball.svg");
+    text-align: left;
+    padding-left: 1rem;
+  }
+
   .pokemon-card {
     margin-left: 0.5em;
     height: fit-content;
@@ -34,7 +51,7 @@ main {
 
   .error-pokemon-card {
     margin-bottom: 0.25rem;
-    width: 14em;
+    width: 20em;
     background-color: $card-color;
     transition: transform 0.5s ease;
     border-radius: 1rem;
@@ -56,6 +73,10 @@ main {
   }
 
   .pokemon-card:hover {
+    transform: scale(0.97);
+  }
+
+  .initial-pokemon-card:hover {
     transform: scale(0.97);
   }
 

@@ -1,12 +1,11 @@
 const POKEMON_LIST_URL = "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0";
 const POKEMON_SEARCH_URL = "https://pokeapi.co/api/v2/pokemon/";
-
 const $loadingListPlaceholder = document.querySelector(
   ".loading-list-placeholder"
 );
-
 const $form = document.querySelector("form");
 const $errorPokemonCard = document.querySelector(".error-pokemon-card");
+const $initialPokemonCard = document.querySelector(".initial-pokemon-card");
 const $pokemonSearchButton = document.querySelector(".pokemon-search-button");
 const $pokemonSearchInput = document.querySelector(".pokemon-search-input");
 const $pokemonListContainer = document.querySelector(".pokemon-list-container");
@@ -57,6 +56,7 @@ function loadSinglePokemon(pokemonURL) {
       return api_response.json();
     })
     .then((pokemonInfo) => {
+      hideElement($initialPokemonCard);
       return createPokemonCard(pokemonInfo);
     })
     .catch((error) => console.error(error));
@@ -78,7 +78,6 @@ function createPokemonCard(pokemon) {
   $pokemonCardBody.classList.add("card-body");
   const $pokemonDescription = document.createElement("ul");
   $pokemonDescription.classList.add("pokemon-description");
-
   $pokemonDescription.appendChild(showPokemonNumber(id));
   $pokemonDescription.appendChild(
     showPokemonType(types.map((types) => types.type.name))
@@ -100,7 +99,7 @@ function showPokemonImage(image, name) {
   const $image = document.createElement("img");
   $image.classList.add("card-img-top", "pokemon-card-image");
   $image.src = image;
-  $image.alt = `An image depicting the front part of pokemon ${capitalizeFirstLetter(
+  $image.alt = `An image depicting the front part of Pokemon ${capitalizeFirstLetter(
     name
   )}`;
   return $image;
@@ -157,6 +156,7 @@ function capitalizeFirstLetter(string) {
 }
 
 $pokemonSearchButton.addEventListener("click", (event) => {
+  hideElement($initialPokemonCard);
   hideElement($pokemonListContainer);
   hideElement($pokemonPaginationContainer);
   validateForm();
@@ -236,16 +236,6 @@ function loadSearchBarPokemon(pokemonSearchURL) {
     });
 }
 
-$homepageButton.addEventListener("click", (event) => {
-  deletePreviousPokemonCards();
-  $pokemonSearchInput.classList.remove("error");
-  hideElement($homepageButton);
-  hideElement($errorPokemonCard);
-  showElement($pokemonListContainer);
-  showElement($pokemonPaginationContainer);
-  loadPokemonList(POKEMON_LIST_URL);
-});
-
 function createCatchCardError() {
   $pokemonSearchInput.value = "";
   $pokemonSearchInput.classList.add("error");
@@ -253,6 +243,17 @@ function createCatchCardError() {
   const $errorDescription = document.querySelector(".error-description");
   $errorDescription.textContent = "That Pokemon doesn't exist. Try again.";
 }
+
+$homepageButton.addEventListener("click", (event) => {
+  deletePreviousPokemonCards();
+  $pokemonSearchInput.classList.remove("error");
+  removeActiveAnimationClass();
+  hideElement($homepageButton);
+  hideElement($errorPokemonCard);
+  showElement($pokemonListContainer);
+  showElement($pokemonPaginationContainer);
+  showElement($initialPokemonCard);
+});
 
 function deletePreviousPokemonCards() {
   const $pokemonCards = document.querySelectorAll(".pokemon-card");
