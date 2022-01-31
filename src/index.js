@@ -10,10 +10,6 @@ const $errorPokemonCard = document.querySelector(".error-pokemon-card");
 const $pokemonSearchButton = document.querySelector(".pokemon-search-button");
 const $pokemonSearchInput = document.querySelector(".pokemon-search-input");
 const $pokemonListContainer = document.querySelector(".pokemon-list-container");
-const $upperNextButton = document.querySelector(".upper-next-button");
-const $upperPreviousButton = document.querySelector(".upper-previous-button");
-const $lowerNextButton = document.querySelector(".lower-next-button");
-const $lowerPreviousButton = document.querySelector(".lower-previous-button");
 const $homepageButton = document.querySelector(".homepage-button");
 let nextPokemonList;
 let previousPokemonList;
@@ -55,7 +51,6 @@ function loadSinglePokemon(pokemonURL) {
       return api_response.json();
     })
     .then((pokemonInfo) => {
-      console.log(pokemonInfo);
       return createPokemonCard(pokemonInfo);
     })
     .catch((error) => console.error(error));
@@ -68,62 +63,91 @@ function createPokemonCard(pokemon) {
     name: name,
     types: types,
     id: id,
+    sprites: { front_default: image },
+    abilities: abilities,
   } = pokemon;
   const $pokemonCard = document.createElement("div");
   $pokemonCard.classList.add("pokemon-card");
-  const $pokemonImage = document.createElement("img");
-  $pokemonImage.classList.add("card-img-top", "pokemon-card-image");
   const $pokemonCardBody = document.createElement("div");
   $pokemonCardBody.classList.add("card-body");
-  const $pokemonTitle = document.createElement("h5");
-  $pokemonTitle.classList.add("pokemon-name");
   const $pokemonDescription = document.createElement("ul");
   $pokemonDescription.classList.add("pokemon-description");
-  const $pokemonNumber = document.createElement("li");
-  const $pokemonWeight = document.createElement("li");
-  const $pokemonHeight = document.createElement("li");
 
-  $pokemonImage.src = pokemon.sprites.front_default;
-  $pokemonImage.alt = `An image depicting the front part of pokemon ${capitalizeFirstLetter(
-    pokemon.name
-  )}`;
-  $pokemonTitle.textContent = `${capitalizeFirstLetter(name)}`;
-  $pokemonNumber.textContent = `Number: ${id}`;
-  $pokemonWeight.textContent = `Weight: ${weight}`;
-  $pokemonHeight.textContent = `Height: ${height}`;
-
-  $pokemonDescription.appendChild($pokemonNumber);
-  $pokemonDescription.appendChild(assessPokemonTypeQuantity(types));
-  $pokemonDescription.appendChild($pokemonWeight);
-  $pokemonDescription.appendChild($pokemonHeight);
-
-  $pokemonCardBody.appendChild($pokemonTitle);
+  $pokemonDescription.appendChild(showPokemonNumber(id));
+  $pokemonDescription.appendChild(
+    showPokemonType(types.map((types) => types.type.name))
+  );
+  $pokemonDescription.appendChild(
+    showPokemonAbilities(abilities.map((abilities) => abilities.ability.name))
+  );
+  $pokemonDescription.appendChild(showPokemonWeight(weight));
+  $pokemonDescription.appendChild(showPokemonHeight(height));
+  $pokemonCardBody.appendChild(showPokemonName(name));
   $pokemonCardBody.appendChild($pokemonDescription);
-
-  $pokemonCard.appendChild($pokemonImage);
+  $pokemonCard.appendChild(showPokemonImage(image, name));
   $pokemonCard.appendChild($pokemonCardBody);
 
   return $pokemonListContainer.appendChild($pokemonCard);
 }
 
+function showPokemonImage(image, name) {
+  const $image = document.createElement("img");
+  $image.classList.add("card-img-top", "pokemon-card-image");
+  $image.src = image;
+  $image.alt = `An image depicting the front part of pokemon ${capitalizeFirstLetter(
+    name
+  )}`;
+  return $image;
+}
+
+function showPokemonName(name) {
+  const $h5 = document.createElement("h5");
+  $h5.classList.add("pokemon-name");
+  $h5.textContent = `${capitalizeFirstLetter(name)}`;
+  return $h5;
+}
+
+function showPokemonNumber(id) {
+  const $li = document.createElement("li");
+  $li.textContent = `Number: ${id}`;
+  return $li;
+}
+
+function showPokemonType(types) {
+  const $li = document.createElement("li");
+  const newArray = [];
+  types.forEach((type) => {
+    newArray.push(capitalizeFirstLetter(type));
+  });
+  $li.textContent = `Type: ${newArray.join(" - ")}`;
+  return $li;
+}
+
+function showPokemonAbilities(abilities) {
+  const $li = document.createElement("li");
+  let newArray = [];
+  abilities.forEach((ability) => {
+    newArray.push(capitalizeFirstLetter(ability));
+  });
+  $li.textContent = `Abilities: ${newArray.join(", ")}`;
+  return $li;
+}
+
+function showPokemonWeight(weight) {
+  const $li = document.createElement("li");
+  $li.textContent = `Weight: ${weight}`;
+  return $li;
+}
+
+function showPokemonHeight(height) {
+  const $li = document.createElement("li");
+  $li.textContent = `Height: ${height}`;
+  return $li;
+}
+
 function capitalizeFirstLetter(string) {
   const newString = string.charAt(0).toUpperCase() + string.slice(1);
   return newString;
-}
-
-function assessPokemonTypeQuantity(typeQuantity) {
-  const $pokemonType = document.createElement("li");
-  if (typeQuantity.length === 2) {
-    $pokemonType.textContent = `Type: ${capitalizeFirstLetter(
-      typeQuantity[0].type.name
-    )} - ${capitalizeFirstLetter(typeQuantity[1].type.name)}`;
-    return $pokemonType;
-  } else {
-    $pokemonType.textContent = `Type: ${capitalizeFirstLetter(
-      typeQuantity[0].type.name
-    )}`;
-    return $pokemonType;
-  }
 }
 
 $pokemonSearchButton.addEventListener("click", (event) => {
@@ -152,10 +176,18 @@ function validateForm(event) {
 }
 
 function validateSearchBar(pokemon) {
-  const regEx = /^[A-z]+$/;
+  const regEx = /^[a-z]+$/i;
+  const regEx2 = /^[a-z]+-[a-z]+$/i;
+  const regEx3 = /^[a-z]+-[a-z]+-[a-z]+$/i;
 
-  if (!regEx.test(pokemon)) return "The Pokemon name has invalid characters.";
-  if (pokemon.length >= 12) return "The Pokemon name is too long.";
+  if (!regEx.test(pokemon)) {
+    if (!regEx2.test(pokemon)) {
+      if (!regEx3.test(pokemon)) {
+        return "The Pokemon name has invalid characters.";
+      }
+    }
+  }
+  if (pokemon.length >= 30) return "The Pokemon name is too long.";
 
   return "";
 }
