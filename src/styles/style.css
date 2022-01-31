@@ -11,7 +11,12 @@ main .pokemon-list .list-group-item {
   text-decoration: none;
 }
 
-main .pokemon-list .list-group-item:hover {
+main .pokemon-list .list-group-item:hover,
+main .pokemon-list .list-group-item:focus-visible {
+  margin-right: 2rem;
+}
+
+main .pokemon-list .active-list-item {
   margin-right: 2rem;
 }
 

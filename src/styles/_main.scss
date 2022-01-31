@@ -8,7 +8,12 @@ main {
       text-decoration: none;
     }
 
-    .list-group-item:hover {
+    .list-group-item:hover,
+    .list-group-item:focus-visible {
+      margin-right: 2rem;
+    }
+
+    .active-list-item {
       margin-right: 2rem;
     }
   }

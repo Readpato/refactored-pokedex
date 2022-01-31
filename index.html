@@ -57,7 +57,7 @@
             class="col col-lg-4 offset-lg-3 col-sm-12 d-flex flex-wrap flex-column"
           >
             <div
-              class="d-flex justify-content-center align-items-center flex-wrap pokemon-list-container"
+              class="d-flex justify-content-center align-items-center flex-wrap pokemon-card-container"
             >
               <div class="pokemon-card">
                 <img
@@ -77,14 +77,14 @@
               </div>
             </div>
           </div>
-          <div class="col col-lg-2 col-sm-2 col-md-4">
+          <div class="col col-lg-2 col-sm-2 col-md-4 pokemon-list-container">
             <ul class="list-group pokemon-list">
               <li class="list-group-item loading-list-placeholder hidden">
                 Loading...
               </li>
             </ul>
           </div>
-          <div class="col col-lg-12 col-md-8 d-flex flex-wrap flex-column">
+          <div class="col col-lg-12 col-md-8 pokemon-pagination-container">
             <nav
               class="mt-1 d-flex justify-content-center mt-0"
               aria-label="Page navigation"
@@ -158,13 +158,36 @@
             </nav>
           </div>
         </div>
-
-        <button
-          type="button"
-          class="btn btn-info btn-lg text-white homepage-button hidden"
+      </div>
+      <div class="row">
+        <div
+          class="col col-lg-12 d-flex align-items-center justify-content-center"
         >
-          Return to Pokedex
-        </button>
+          <div class="mt-2 error-pokemon-card hidden">
+            <img
+              class="card-img-top error-pokemon-card-image"
+              src="src/images/pokemon-silhouette.png"
+              alt="An image depicting the silhouette of a Pokemon."
+            />
+            <div class="card-body">
+              <h5 class="error-pokemon-name">Uh-oh! Error!</h5>
+              <ul class="error-pokemon-description">
+                <li>Number: 404</li>
+                <li class="error-description"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col col-lg-12 d-flex align-items-center justify-content-center"
+        >
+          <button
+            type="button"
+            class="btn btn-info btn-lg text-white homepage-button hidden"
+          >
+            Return to Pokedex
+          </button>
+        </div>
       </div>
     </main>
     <script

@@ -10,6 +10,10 @@ const $errorPokemonCard = document.querySelector(".error-pokemon-card");
 const $pokemonSearchButton = document.querySelector(".pokemon-search-button");
 const $pokemonSearchInput = document.querySelector(".pokemon-search-input");
 const $pokemonListContainer = document.querySelector(".pokemon-list-container");
+const $pokemonPaginationContainer = document.querySelector(
+  ".pokemon-pagination-container"
+);
+const $pokemonCardContainer = document.querySelector(".pokemon-card-container");
 const $homepageButton = document.querySelector(".homepage-button");
 let nextPokemonList;
 let previousPokemonList;
@@ -36,6 +40,8 @@ function showPokemonList(pokemon) {
     $li.classList.add("list-group-item");
     $li.textContent = `${capitalizeFirstLetter(pokemon.name)}`;
     $li.addEventListener("click", () => {
+      removeActiveAnimationClass();
+      addActiveAnimationClass($li);
       deletePreviousPokemonCards();
       loadSinglePokemon(`${POKEMON_SEARCH_URL}${pokemon.name}`);
     });
@@ -87,7 +93,7 @@ function createPokemonCard(pokemon) {
   $pokemonCard.appendChild(showPokemonImage(image, name));
   $pokemonCard.appendChild($pokemonCardBody);
 
-  return $pokemonListContainer.appendChild($pokemonCard);
+  return $pokemonCardContainer.appendChild($pokemonCard);
 }
 
 function showPokemonImage(image, name) {
@@ -151,6 +157,8 @@ function capitalizeFirstLetter(string) {
 }
 
 $pokemonSearchButton.addEventListener("click", (event) => {
+  hideElement($pokemonListContainer);
+  hideElement($pokemonPaginationContainer);
   validateForm();
   event.preventDefault();
 });
@@ -166,10 +174,6 @@ function validateForm(event) {
 
   if (success) {
     deletePreviousPokemonCards();
-    hideElement($lowerNextButton);
-    hideElement($lowerPreviousButton);
-    hideElement($upperNextButton);
-    hideElement($upperPreviousButton);
     showElement($homepageButton);
     loadSearchBarPokemon(`${POKEMON_SEARCH_URL}${pokemonName}`);
   }
@@ -205,10 +209,6 @@ function handleErrors(errors) {
       const $errorDescription = document.querySelector(".error-description");
       $errorDescription.textContent = error[key];
       deletePreviousPokemonCards();
-      hideElement($lowerPreviousButton);
-      hideElement($lowerNextButton);
-      hideElement($upperPreviousButton);
-      hideElement($upperNextButton);
       showElement($homepageButton);
       showElement($errorPokemonCard);
       errorQuantity++;
@@ -239,12 +239,10 @@ function loadSearchBarPokemon(pokemonSearchURL) {
 $homepageButton.addEventListener("click", (event) => {
   deletePreviousPokemonCards();
   $pokemonSearchInput.classList.remove("error");
-  showElement($lowerNextButton);
-  showElement($lowerPreviousButton);
-  showElement($upperNextButton);
-  showElement($upperPreviousButton);
   hideElement($homepageButton);
   hideElement($errorPokemonCard);
+  showElement($pokemonListContainer);
+  showElement($pokemonPaginationContainer);
   loadPokemonList(POKEMON_LIST_URL);
 });
 
@@ -261,6 +259,16 @@ function deletePreviousPokemonCards() {
   $pokemonCards.forEach((card) => {
     card.remove();
   });
+}
+
+function removeActiveAnimationClass() {
+  const $element = document.querySelector(".list-group-item.active-list-item");
+  if ($element === null) return;
+  return $element.classList.remove("active-list-item");
+}
+
+function addActiveAnimationClass(element) {
+  return element.classList.add("active-list-item");
 }
 
 function hideElement(element) {
