@@ -26,16 +26,9 @@ function initialize(pokeApiURL) {
       return response.json();
     })
     .then((responseJSON) => {
-      const { results: pokemon } = responseJSON;
+      const { results: pokemonList } = responseJSON;
       hideElement($loadingListPlaceholder);
-      console.log(pokemon);
-      showPokemonList(pokemon);
-
-      // nextPokemonList = api_responseJSON.next;
-      // previousPokemonList = api_responseJSON.previous;
-      // return api_responseJSON.results.forEach((object) => {
-      //   // loadSinglePokemon(object.url);
-      // });
+      showPokemonList(pokemonList);
     })
     .catch((error) => console.error(error));
 }
@@ -61,13 +54,21 @@ function loadSinglePokemon(pokemonURL) {
         return "Something went wrong, please try again later.";
       return api_response.json();
     })
-    .then((api_responseJSON) => {
-      return createPokemonCard(api_responseJSON);
+    .then((pokemonInfo) => {
+      console.log(pokemonInfo);
+      return createPokemonCard(pokemonInfo);
     })
     .catch((error) => console.error(error));
 }
 
 function createPokemonCard(pokemon) {
+  const {
+    height: height,
+    weight: weight,
+    name: name,
+    types: types,
+    id: id,
+  } = pokemon;
   const $pokemonCard = document.createElement("div");
   $pokemonCard.classList.add("pokemon-card");
   const $pokemonImage = document.createElement("img");
@@ -86,13 +87,13 @@ function createPokemonCard(pokemon) {
   $pokemonImage.alt = `An image depicting the front part of pokemon ${capitalizeFirstLetter(
     pokemon.name
   )}`;
-  $pokemonTitle.textContent = `${capitalizeFirstLetter(pokemon.name)}`;
-  $pokemonNumber.textContent = `Number: ${pokemon.id}`;
-  $pokemonWeight.textContent = `Weight: ${pokemon.weight}`;
-  $pokemonHeight.textContent = `Height: ${pokemon.height}`;
+  $pokemonTitle.textContent = `${capitalizeFirstLetter(name)}`;
+  $pokemonNumber.textContent = `Number: ${id}`;
+  $pokemonWeight.textContent = `Weight: ${weight}`;
+  $pokemonHeight.textContent = `Height: ${height}`;
 
   $pokemonDescription.appendChild($pokemonNumber);
-  $pokemonDescription.appendChild(assessPokemonTypeQuantity(pokemon.types));
+  $pokemonDescription.appendChild(assessPokemonTypeQuantity(types));
   $pokemonDescription.appendChild($pokemonWeight);
   $pokemonDescription.appendChild($pokemonHeight);
 
