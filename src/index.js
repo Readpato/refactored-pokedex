@@ -14,8 +14,6 @@ const $pokemonPaginationContainer = document.querySelector(
 );
 const $pokemonCardContainer = document.querySelector(".pokemon-card-container");
 const $homepageButton = document.querySelector(".homepage-button");
-let nextPokemonList;
-let previousPokemonList;
 
 function initialize(pokeApiURL) {
   return fetch(pokeApiURL)
@@ -25,11 +23,56 @@ function initialize(pokeApiURL) {
       return response.json();
     })
     .then((responseJSON) => {
-      const { results: pokemonList } = responseJSON;
+      const {
+        results: pokemonList,
+        count: pokemonCount,
+        next: nextURL,
+        previous: previousURL,
+      } = responseJSON;
+      console.log(responseJSON);
+      showPagination(pokemonCount, nextURL, previousURL);
       hideElement($loadingListPlaceholder);
-      showPokemonList(pokemonList);
+      return showPokemonList(pokemonList);
     })
     .catch((error) => console.error(error));
+}
+
+function showPagination(count, next, previous) {
+  const POKEMON_PER_PAGE = 20;
+  const totalPages = Math.ceil(count / POKEMON_PER_PAGE);
+  const $pokemonPagination = document.querySelector(".pokemon-pagination");
+
+  if (previous) {
+    const $previous = document.createElement("li");
+    const $previousLink = document.createElement("a");
+    $previous.className = "page-item";
+    $previousLink.className = "page-link";
+    $previousLink.textContent = "Previous";
+    $previous.appendChild($previousLink);
+    $pokemonPagination.appendChild($previous);
+  }
+
+  for (let i = 0; i < totalPages; i++) {
+    const pageNumber = 1 + i;
+    const $page = document.createElement("li");
+    const $pageLink = document.createElement("a");
+    $page.className = "page-item";
+    $pageLink.className = "page-link";
+    $page.appendChild($pageLink);
+    $pageLink.textContent = pageNumber;
+    $pageLink.dataset.page = pageNumber;
+    $pokemonPagination.appendChild($page);
+  }
+
+  if (next) {
+    const $next = document.createElement("li");
+    const $nextLink = document.createElement("a");
+    $next.className = "page-item";
+    $nextLink.className = "page-link";
+    $nextLink.textContent = "Next";
+    $next.appendChild($nextLink);
+    $pokemonPagination.appendChild($next);
+  }
 }
 
 function showPokemonList(pokemon) {

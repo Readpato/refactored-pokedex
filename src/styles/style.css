@@ -103,6 +103,10 @@ main .error-pokemon-card:hover {
           transform: scale(0.97);
 }
 
+main .page-link {
+  color: #000000;
+}
+
 * {
   margin: 0;
   padding: 0;
