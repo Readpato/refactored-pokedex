@@ -15,8 +15,8 @@ const $pokemonPaginationContainer = document.querySelector(
 const $pokemonCardContainer = document.querySelector(".pokemon-card-container");
 const $homepageButton = document.querySelector(".homepage-button");
 
-function initialize(pokeApiURL) {
-  return fetch(pokeApiURL)
+function initialize(apiURL) {
+  return fetch(apiURL)
     .then((response) => {
       if (!response.ok) return "Something went wrong, please try again later.";
       showElement($loadingListPlaceholder);
@@ -30,53 +30,108 @@ function initialize(pokeApiURL) {
         previous: previousURL,
       } = responseJSON;
       console.log(responseJSON);
-      showPagination(pokemonCount, nextURL, previousURL);
+      showPagination(pokemonCount, nextURL, previousURL, changePage);
       hideElement($loadingListPlaceholder);
       return showPokemonList(pokemonList);
     })
     .catch((error) => console.error(error));
 }
 
-function showPagination(count, next, previous) {
+function createPaginatorItem(text, url = "#") {
+  const $pokemonPagination = document.querySelector(".pokemon-pagination");
+  const $item = document.createElement("li");
+  const $link = document.createElement("a");
+  $item.className = "page-item";
+  $link.className = "page-link";
+  $link.textContent = text;
+  $link.href = url;
+  $link.dataset.page = text;
+  $item.appendChild($link);
+  $pokemonPagination.appendChild($item);
+}
+
+function changePage(event) {
+  event.preventDefault();
+  const POKEMON_PER_PAGE = 20;
+  let offset;
+  let limit = POKEMON_PER_PAGE;
+  const href = event.target.getAttribute("href");
+  if (href === "#") {
+    if (
+      event.target.dataset.page === "Previous" ||
+      event.target.dataset.page === "Next"
+    ) {
+      return;
+    }
+    offset = POKEMON_PER_PAGE * Number(event.target.dataset.page);
+  } else {
+    const parameters = obtainURLParameters(href);
+    offset = parameters.offset;
+    limit = parameters.limit;
+  }
+  loadPokemon(offset, limit);
+}
+
+function showPagination(count, nextURL, previousURL) {
   const POKEMON_PER_PAGE = 20;
   const totalPages = Math.ceil(count / POKEMON_PER_PAGE);
   const $pokemonPagination = document.querySelector(".pokemon-pagination");
 
-  if (previous) {
-    const $previous = document.createElement("li");
-    const $previousLink = document.createElement("a");
-    $previous.className = "page-item";
-    $previousLink.className = "page-link";
-    $previousLink.textContent = "Previous";
-    $previous.appendChild($previousLink);
-    $pokemonPagination.appendChild($previous);
+  $pokemonPagination.innerHTML = "";
+
+  if (previousURL) {
+    createPaginatorItem("Previous", previousURL);
+  } else {
+    createPaginatorItem("Previous", "#");
   }
 
   for (let i = 0; i < totalPages; i++) {
-    const pageNumber = 1 + i;
-    const $page = document.createElement("li");
-    const $pageLink = document.createElement("a");
-    $page.className = "page-item";
-    $pageLink.className = "page-link";
-    $page.appendChild($pageLink);
-    $pageLink.textContent = pageNumber;
-    $pageLink.dataset.page = pageNumber;
-    $pokemonPagination.appendChild($page);
+    const pageNumber = i + 0;
+    createPaginatorItem(pageNumber);
   }
 
-  if (next) {
-    const $next = document.createElement("li");
-    const $nextLink = document.createElement("a");
-    $next.className = "page-item";
-    $nextLink.className = "page-link";
-    $nextLink.textContent = "Next";
-    $next.appendChild($nextLink);
-    $pokemonPagination.appendChild($next);
+  if (nextURL) {
+    createPaginatorItem("Next", nextURL);
+  } else {
+    createPaginatorItem("Next", "#");
   }
+
+  $pokemonPagination.addEventListener("click", changePage);
+}
+
+function obtainURLParameters(url) {
+  let offset;
+  let limit;
+  try {
+    offset = /offset=([0-9]+)/gi.exec(url).pop();
+    limit = /limit=([0-9]+)/gi.exec(url).pop();
+  } catch {
+    offset = undefined;
+    limit = undefined;
+  }
+  return { offset, limit };
+}
+
+function loadPokemon(offset = 0, limit = 20) {
+  fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
+    .then((response) => {
+      return response.json();
+    })
+    .then((responseJSON) => {
+      const {
+        results: pokemonList,
+        count: count,
+        next: next,
+        previous: previous,
+      } = responseJSON;
+      showPagination(count, next, previous);
+      return showPokemonList(pokemonList);
+    });
 }
 
 function showPokemonList(pokemon) {
   const $pokemonList = document.querySelector(".pokemon-list");
+  $pokemonList.innerHTML = "";
   pokemon.forEach((pokemon) => {
     const $li = document.createElement("li");
     $li.classList.add("list-group-item");
