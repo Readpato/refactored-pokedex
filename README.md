@@ -4,7 +4,7 @@
 
 Learn more about Pokemon with the -refactored- Pokedex!
 
-Demo: <a href="">Pokedex</a>
+Demo: <a href="https://readpato.github.io/refactored-pokedex/">Refactored Pokedex</a>
 
 ### Technologies Used
 
@@ -42,7 +42,7 @@ The Pokedex is pretty simple to use. Once the main page is loaded, the user will
 - A list of twenty Pokemon names available for choosing.
 - A paginator that allows the user to cycle between Pokemon lists.
 
-<img  src="" align="center">
+<img  src="https://github.com/Readpato/refactored-pokedex/blob/gh-pages/src/images/readme-images/pokedex-homepage.PNG" align="center">
 
 The navigation bar has two functionalities with its available elements:
 
@@ -50,15 +50,15 @@ The navigation bar has two functionalities with its available elements:
 
 - The search bar allows the user to search by name for a specified Pokemon and it will get in return a card showing a description from that Pokemon.
 
-<img  src="" align="center">
+<img  src="https://github.com/Readpato/refactored-pokedex/blob/gh-pages/src/images/readme-images/pokedex-search-pokemon.PNG" align="center">
 
 To the right of the page, a list of Pokemon will appear. If the user clicks on top of it, it will show a card depicting some information about the selected Pokemon. A small animation will show the user which Pokemon it has selected.
 
-<img  src="" align="center">
+<img  src="https://github.com/Readpato/refactored-pokedex/blob/gh-pages/src/images/readme-images/pokemon-list-selection-og.PNG" align="center">
 
 At the bottom of the page, the user may choose to skip to the next or previous page or even to select a page that he/she wishes to go to. This will show new Pokemon to select from the list.
 
-<img  src="" align="center">
+<img  src="https://github.com/Readpato/refactored-pokedex/blob/gh-pages/src/images/readme-images/pokemon-page-change.PNG" align="center">
 
 When using the search bar, should the user insert in the input:
 
@@ -68,7 +68,7 @@ When using the search bar, should the user insert in the input:
 
 A custom Pokemon card will appear displaying the silhouette of a Pokemon (Who's that Pokemon?) and a short description of the error that has occured.
 
-<img src="" align="center">
+<img src="https://github.com/Readpato/refactored-pokedex/blob/gh-pages/src/images/readme-images/pokedex-search-error.PNG" align="center">
 
 #
 
