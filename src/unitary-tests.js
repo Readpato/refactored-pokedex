@@ -5,7 +5,7 @@ function testValidateSearchBar() {
   );
 
   console.assert(
-    validateSearchBar("pikachupikachupikachu") ===
+    validateSearchBar("pikachupikachupikachupikachupikachupikachu") ===
       "The Pokemon name is too long.",
     "The function validateSearcBar did not validate if the input value was too long."
   );

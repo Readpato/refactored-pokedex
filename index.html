@@ -53,119 +53,81 @@
     <main>
       <div class="container-fluid mt-2">
         <div class="row">
-          <div class="col col-lg-2">
-            <ul class="list-group pokemon-list">
-              <li class="list-group-item loading-list-placeholder hidden">
-                Loading...
-              </li>
-            </ul>
-          </div>
-          <div class="col col-lg-10 d-flex flex-wrap flex-column">
-            <div class="row">
-              <div class="col col-lg-12">
-                <h2 class="text-center">Choose a Pokemon from the list</h2>
-              </div>
-            </div>
-            <div class="row">
-              <div
-                class="col col-lg-12 d-flex justify-content-center align-items-center flex-wrap pokemon-list-container"
-              >
-                <div class="pokemon-card">
-                  <img
-                    class="card-img-top pokemon-card-image"
-                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
-                    alt="An image depicting the front part of pokemon Ivysaur"
-                  />
-                  <div class="card-body">
-                    <h5 class="pokemon-name">Ivysaur</h5>
-                    <ul class="pokemon-description">
-                      <li>Number: 2</li>
-                      <li>Type: Grass - Poison</li>
-                      <li>Weight: 130</li>
-                      <li>Height: 10</li>
-                    </ul>
-                  </div>
+          <div
+            class="col col-lg-4col-sm-12 d-flex flex-wrap flex-column justify-content-center align-items-center"
+          >
+            <div class="pokemon-card-container">
+              <!--- --->
+              <div class="mt-2 initial-pokemon-card">
+                <img
+                  class="card-img-top initial-pokemon-card-image"
+                  src="src/images/initial-pokemon-silhouette.png"
+                  alt="An image depicting the silhouette of a Pokemon."
+                />
+                <div class="card-body">
+                  <h5 class="initial-pokemon-name">Select a Pokemon!</h5>
+                  <ul class="initial-pokemon-description">
+                    <li>Find more about pokemon by clicking on their name.</li>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
-          <nav
-            class="mt-1 d-flex justify-content-center mt-0"
-            aria-label="Page navigation"
-          >
-            <ul class="pagination pagination-sm">
-              <li class="page-item">
-                <a class="page-link" href="#">Previous</a>
+          <div class="col col-lg-2 col-sm-12 col-md-12 pokemon-list-container">
+            <ul class="list-group pokemon-list">
+              <li class="list-group-item loading-list-placeholder hidden">
+                Loading...
               </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              <!--- --->
             </ul>
-          </nav>
+          </div>
+          <div class="col col-lg-12 col-md-8 pokemon-pagination-container">
+            <nav
+              class="mt-1 d-flex justify-content-center mt-0"
+              aria-label="Page navigation"
+            >
+              <ul
+                class="pagination pagination-sm d-flex flex-wrap pokemon-pagination"
+              >
+                <!--- --->
+              </ul>
+            </nav>
+          </div>
         </div>
-
-        <button
-          type="button"
-          class="btn btn-info btn-lg text-white homepage-button hidden"
-        >
-          Return to Pokedex
-        </button>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div
+            class="col col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center align-items-center"
+          >
+            <div class="mt-2 error-pokemon-card hidden">
+              <img
+                class="card-img-top error-pokemon-card-image"
+                src="src/images/error-pokemon-silhouette.png"
+                alt="An image depicting the silhouette of a Pokemon."
+              />
+              <div class="card-body">
+                <h5 class="error-pokemon-name">Uh-oh! Error!</h5>
+                <ul class="error-pokemon-description">
+                  <li>Number: 404</li>
+                  <li class="error-description"></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            class="col col-lg-12 col-md-12 col-sm-12 d-flex align-items-center justify-content-center"
+          >
+            <button
+              type="button"
+              class="btn btn-info btn-lg text-white homepage-button hidden"
+            >
+              Return to Pokedex
+            </button>
+          </div>
+        </div>
       </div>
     </main>
     <script
