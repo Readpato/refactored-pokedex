@@ -2,9 +2,9 @@
 
 ## Description
 
-Learn more about Pokemon with the Pokedex!
+Learn more about Pokemon with the -refactored- Pokedex!
 
-Demo: <a href="https://readpato.github.io/pokedex/index.html">Pokedex</a>
+Demo: <a href="">Pokedex</a>
 
 ### Technologies Used
 
@@ -17,6 +17,8 @@ For this project the technologies and tools used were:
 - HTML
 - NPM
 - Cypress
+
+Authors note: As this project was intended to refactor the JavaScript code, the UI is not so good and do not represent the way I normally handle UI in personal projects.
 
 #
 
@@ -37,10 +39,10 @@ This will allow to download the dependencies you need to run the Pokedex properl
 The Pokedex is pretty simple to use. Once the main page is loaded, the user will have right at his disposition:
 
 - A navigation bar that has the title and a search bar.
-- A list of ten Pokemon with a summary about them.
-- Two buttons that allow the cycling between the following and (if possible) the previous Pokemon.
+- A list of twenty Pokemon names available for choosing.
+- A paginator that allows the user to cycle between Pokemon lists.
 
-<img  src="https://github.com/Readpato/pokedex/blob/gh-pages/src/images/readme-images/pokedex-homepage.PNG" align="center">
+<img  src="" align="center">
 
 The navigation bar has two functionalities with its available elements:
 
@@ -48,14 +50,17 @@ The navigation bar has two functionalities with its available elements:
 
 - The search bar allows the user to search by name for a specified Pokemon and it will get in return a card showing a description from that Pokemon.
 
-<img  src="https://github.com/Readpato/pokedex/blob/gh-pages/src/images/readme-images/pokedex-search.PNG" align="center">
+<img  src="" align="center">
 
-The list that first appears in the homepage is the collection of the first ten Pokemon from the first generation.
-If the user desires to circle through the entirety of the Pokemon generations, they can use the "Prev" and "Next" buttons. The former allows the user to circle backwards in the list and the latter allows to get newer Pokemon.
+To the right of the page, a list of Pokemon will appear. If the user clicks on top of it, it will show a card depicting some information about the selected Pokemon. A small animation will show the user which Pokemon it has selected.
 
-<img  src="https://github.com/Readpato/pokedex/blob/gh-pages/src/images/readme-images/pokedex-next-page.PNG" align="center">
+<img  src="" align="center">
 
-Should the user insert in the input:
+At the bottom of the page, the user may choose to skip to the next or previous page or even to select a page that he/she wishes to go to. This will show new Pokemon to select from the list.
+
+<img  src="" align="center">
+
+When using the search bar, should the user insert in the input:
 
 - An invalid character.
 - A Pokemon name that exceeds 30 characters.
@@ -63,7 +68,7 @@ Should the user insert in the input:
 
 A custom Pokemon card will appear displaying the silhouette of a Pokemon (Who's that Pokemon?) and a short description of the error that has occured.
 
-<img src="https://github.com/Readpato/pokedex/blob/gh-pages/src/images/readme-images/pokedex-error.PNG" align="center">
+<img src="" align="center">
 
 #
 
@@ -73,11 +78,17 @@ A custom Pokemon card will appear displaying the silhouette of a Pokemon (Who's 
 
 - Working with fetch API and asynchronous code.
 
+- Creating a Paginator
+
 - Conditional Testing with Cypress.
 
 #
 
 ## What I learned
+
+- How to not overwhelm an API. The first Pokedex I created send too much requests to the API and it's better not to do that. Now, with the Paginator and also a list of Pokemon, it allows the user to just create one request at the time.
+
+- How to create a Paginator! It wasn't easy, and I'll still need to wrap my mind around it more, but I learned many new things on how to write code!
 
 - How to correctly fetch a RESTful API content. I can see why the architecture of an API is really important. Once the resources that the API uses were clear for me, the fetching of its results was pretty straightforward.
 
