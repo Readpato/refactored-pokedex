@@ -26,6 +26,16 @@ context("Pokedex", () => {
         "Insert Pokemon Name"
       );
       cy.get(".pokemon-search-button").should("contain", "Search");
+      cy.get(".initial-pokemon-card").should("exist").and("be.visible");
+      cy.get(".initial-pokemon-card img").should(
+        "have.attr",
+        "src",
+        "src/images/initial-pokemon-silhouette.png"
+      );
+      cy.get(".initial-pokemon-card h5").should("contain", "Select a Pokemon!");
+      cy.get(".initial-pokemon-card li")
+        .should("have.length", "1")
+        .and("contain", "Find more about pokemon by clicking on their name.");
     });
   });
 });
