@@ -141,5 +141,28 @@ context("Pokedex", () => {
         .eq(1)
         .should("contain", "The Pokemon name has invalid characters.");
     });
+    it("Return to homepage and select a Pokemon from the list", () => {
+      cy.get(".homepage-button").click();
+      cy.get(".initial-pokemon-card").should("be.visible");
+      cy.get(".pokemon-list").should("be.visible");
+      cy.get(".pokemon-pagination").should("be.visible");
+      cy.get(".homepage-button").should("not.be.visible");
+      cy.get(".list-group-item").eq(0).click();
+      cy.get(".initial-pokemon-card").should("not.be.visible");
+      cy.get(".pokemon-list").should("be.visible");
+      cy.get(".pokemon-pagination").should("be.visible");
+      cy.get(".pokemon-card").should("be.visible");
+      cy.get(".pokemon-card h5").should("contain", "Bulbasaur");
+      cy.get(".pokemon-description li").should("have.length", "5");
+      cy.get(".pokemon-description li").eq(0).should("contain", "Number: 1");
+      cy.get(".pokemon-description li")
+        .eq(1)
+        .should("contain", "Type: Grass - Poison");
+      cy.get(".pokemon-description li")
+        .eq(2)
+        .should("contain", "Abilities: Overgrow, Chlorophyll");
+      cy.get(".pokemon-description li").eq(3).should("contain", "Weight: 69");
+      cy.get(".pokemon-description li").eq(4).should("contain", "Height: 7");
+    });
   });
 });
