@@ -36,6 +36,13 @@ context("Pokedex", () => {
       cy.get(".initial-pokemon-card li")
         .should("have.length", "1")
         .and("contain", "Find more about pokemon by clicking on their name.");
+      cy.get(".pokemon-list .list-group-item ")
+        .should("have.length", "20")
+        .and("be.visible");
+      cy.get(".pokemon-pagination")
+        .should("be.visible")
+        .and("contain", "Previous")
+        .and("contain", "Next");
     });
   });
 });
