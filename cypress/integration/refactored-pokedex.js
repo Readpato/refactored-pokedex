@@ -45,4 +45,101 @@ context("Pokedex", () => {
         .and("contain", "Next");
     });
   });
+  describe("Functionality", () => {
+    it("Search a Pokemon and display its information", () => {
+      cy.get(".pokemon-search-input").type("onix");
+      cy.get(".pokemon-search-button").click();
+      cy.get(".initial-pokemon-card").should("not.be.visible");
+      cy.get(".pokemon-list").should("not.be.visible");
+      cy.get(".pokemon-pagination").should("not.be.visible");
+      cy.get(".homepage-button").should("be.visible");
+      cy.get(".pokemon-card").should("have.length", "1");
+      cy.get(".pokemon-card h5").should("contain", "Onix");
+      cy.get(".pokemon-description li").should("have.length", "5");
+      cy.get(".pokemon-description li").eq(0).should("contain", "Number: 95");
+      cy.get(".pokemon-description li")
+        .eq(1)
+        .should("contain", "Type: Rock - Ground");
+      cy.get(".pokemon-description li")
+        .eq(2)
+        .should("contain", "Abilities: Rock-head, Sturdy, Weak-armor");
+      cy.get(".pokemon-description li").eq(3).should("contain", "Weight: 2100");
+      cy.get(".pokemon-description li").eq(4).should("contain", "Height: 88");
+    });
+    it("Return to homepage and search a non existing Pokemon", () => {
+      cy.get(".homepage-button").click();
+      cy.get(".initial-pokemon-card").should("be.visible");
+      cy.get(".pokemon-list").should("be.visible");
+      cy.get(".pokemon-pagination").should("be.visible");
+      cy.get(".homepage-button").should("not.be.visible");
+      cy.get(".pokemon-search-input").clear().type("onixx");
+      cy.get(".pokemon-search-button").click();
+      cy.get(".initial-pokemon-card").should("not.be.visible");
+      cy.get(".pokemon-list").should("not.be.visible");
+      cy.get(".pokemon-pagination").should("not.be.visible");
+      cy.get(".homepage-button").should("be.visible");
+      cy.get(".error-pokemon-card").should("be.visible");
+      cy.get(".error-pokemon-card h5").should("contain", "Uh-oh! Error!");
+      cy.get(".error-pokemon-description li").should("have.length", "2");
+      cy.get(".error-pokemon-description li")
+        .eq(0)
+        .should("contain", "Number: 404");
+      cy.get(".error-pokemon-description li")
+        .eq(1)
+        .should("contain", "That Pokemon doesn't exist. Try again.");
+    });
+    it("Search a long Pokemon name", () => {
+      cy.get(".pokemon-search-input")
+        .clear()
+        .type("onixxonixxonixxonixxonixxonixxonixx");
+      cy.get(".pokemon-search-button").click();
+      cy.get(".initial-pokemon-card").should("not.be.visible");
+      cy.get(".pokemon-list").should("not.be.visible");
+      cy.get(".pokemon-pagination").should("not.be.visible");
+      cy.get(".homepage-button").should("be.visible");
+      cy.get(".error-pokemon-card").should("be.visible");
+      cy.get(".error-pokemon-card h5").should("contain", "Uh-oh! Error!");
+      cy.get(".error-pokemon-description li").should("have.length", "2");
+      cy.get(".error-pokemon-description li")
+        .eq(0)
+        .should("contain", "Number: 404");
+      cy.get(".error-pokemon-description li")
+        .eq(1)
+        .should("contain", "The Pokemon name is too long.");
+    });
+    it("Search an invalid Pokemon Name", () => {
+      cy.get(".pokemon-search-input").clear().type("0nix");
+      cy.get(".pokemon-search-button").click();
+      cy.get(".initial-pokemon-card").should("not.be.visible");
+      cy.get(".pokemon-list").should("not.be.visible");
+      cy.get(".pokemon-pagination").should("not.be.visible");
+      cy.get(".homepage-button").should("be.visible");
+      cy.get(".error-pokemon-card").should("be.visible");
+      cy.get(".error-pokemon-card h5").should("contain", "Uh-oh! Error!");
+      cy.get(".error-pokemon-description li").should("have.length", "2");
+      cy.get(".error-pokemon-description li")
+        .eq(0)
+        .should("contain", "Number: 404");
+      cy.get(".error-pokemon-description li")
+        .eq(1)
+        .should("contain", "The Pokemon name has invalid characters.");
+    });
+    it("Search an empty Pokemon Name", () => {
+      cy.get(".pokemon-search-input").clear();
+      cy.get(".pokemon-search-button").click();
+      cy.get(".initial-pokemon-card").should("not.be.visible");
+      cy.get(".pokemon-list").should("not.be.visible");
+      cy.get(".pokemon-pagination").should("not.be.visible");
+      cy.get(".homepage-button").should("be.visible");
+      cy.get(".error-pokemon-card").should("be.visible");
+      cy.get(".error-pokemon-card h5").should("contain", "Uh-oh! Error!");
+      cy.get(".error-pokemon-description li").should("have.length", "2");
+      cy.get(".error-pokemon-description li")
+        .eq(0)
+        .should("contain", "Number: 404");
+      cy.get(".error-pokemon-description li")
+        .eq(1)
+        .should("contain", "The Pokemon name has invalid characters.");
+    });
+  });
 });
