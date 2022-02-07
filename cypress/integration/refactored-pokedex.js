@@ -164,5 +164,46 @@ context("Pokedex", () => {
       cy.get(".pokemon-description li").eq(3).should("contain", "Weight: 69");
       cy.get(".pokemon-description li").eq(4).should("contain", "Height: 7");
     });
+    it("Select another Pokemon from the list and show it ", () => {
+      cy.get(".list-group-item").eq(16).click();
+      cy.get(".initial-pokemon-card").should("not.be.visible");
+      cy.get(".pokemon-list").should("be.visible");
+      cy.get(".pokemon-pagination").should("be.visible");
+      cy.get(".pokemon-card").should("be.visible");
+      cy.get(".pokemon-card h5").should("contain", "Pidgeotto");
+      cy.get(".pokemon-description li").should("have.length", "5");
+      cy.get(".pokemon-description li").eq(0).should("contain", "Number: 17");
+      cy.get(".pokemon-description li")
+        .eq(1)
+        .should("contain", "Type: Normal - Flying");
+      cy.get(".pokemon-description li")
+        .eq(2)
+        .should("contain", "Abilities: Keen-eye, Tangled-feet, Big-pecks");
+      cy.get(".pokemon-description li").eq(3).should("contain", "Weight: 300");
+      cy.get(".pokemon-description li").eq(4).should("contain", "Height: 11");
+    });
+    it("Make sure the change page function works correctly", () => {
+      let firstPagePokemonNames = [];
+      cy.get(".list-group-item").then((items) => {
+        items.each((index, item) => {
+          firstPagePokemonNames.push(item.textContent);
+        });
+      });
+      cy.get(".pokemon-pagination li").eq(2).click();
+      cy.wait(500);
+      cy.get(".list-group-item").then((item) => {
+        expect(firstPagePokemonNames).to.not.include(item[0].textContent);
+      });
+      cy.get(".pokemon-pagination li").first().click();
+      cy.wait(500);
+      cy.get(".list-group-item").then((item) => {
+        expect(firstPagePokemonNames).to.include(item[0].textContent);
+      });
+      cy.get(".pokemon-pagination li").last().click();
+      cy.wait(500);
+      cy.get(".list-group-item").then((item) => {
+        expect(firstPagePokemonNames).to.not.include(item[0].textContent);
+      });
+    });
   });
 });
