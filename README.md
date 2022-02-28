@@ -17,6 +17,7 @@ For this project the technologies and tools used were:
 - HTML
 - NPM
 - Cypress
+- API: <a href="https://pokeapi.co/">Link</a>
 
 Authors note: As this project was intended to refactor the JavaScript code, the UI is not so good and do not represent the way I normally handle UI in personal projects.
 
